@@ -1,7 +1,7 @@
 def format1(opcode, funct = 0b00000):
-    r1 = int(raw_input("r1: "))
+    r1 = int(input("r1: "))
     r2 = int(input("r2: "))
-    shamt = int(raw_input("shamt: "))
+    shamt = int(input("shamt: "))
     empty = 0
 
     opcode = format(opcode, '06b')
@@ -15,8 +15,8 @@ def format1(opcode, funct = 0b00000):
     return instr
 
 def format2(opcode, funct = 0b00000):
-    r1 = int(raw_input("r1: "))
-    imm16 = int(raw_input("imm16: "))
+    r1 = int(input("r1: "))
+    imm16 = int(input("imm16: "))
 
     opcode = format(opcode, '06b')
     r1 = format(r1, '05b')
@@ -27,9 +27,9 @@ def format2(opcode, funct = 0b00000):
     return instr
 
 def format3(opcode, funct = ''):
-    r1 = int(raw_input("r1: "))
-    r2 = int(raw_input("r2: "))
-    desl = int(raw_input("desl: "))
+    r1 = int(input("r1: "))
+    r2 = int(input("r2: "))
+    desl = int(input("desl: "))
 
     opcode = format(opcode, '06b')
     r1 = format(r1, '05b')
@@ -43,6 +43,23 @@ def funknown():
     print('ERROR: method unknown')
     return 'ERROR'
 
+def write_code(content, fpath = 'code.txt'):
+    pattern = 'mem_i[{0}] = 32\'b{1};'    
+    with open(fpath, 'w') as fd:
+
+        # First write
+        fd.write(pattern.format(0, str(content[0])))    
+
+        # Write block
+        for idx, line in enumerate(content):
+
+            # First line already wrote
+            if idx == 0:
+                continue
+            
+            fd.write('\n')                                  
+            fd.write(pattern.format(idx, line))
+            
 if __name__ == '__main__':
     c = 'c'
     
@@ -79,10 +96,14 @@ if __name__ == '__main__':
     
     code = []
     while(c != 'q'):
-        f, op, funct = isa.get(raw_input('func: '), (funknown, 0b0, ''))
+        f, op, funct = isa.get(input('func: '), (funknown, 0b0, ''))
         code.append(f(op, funct))
-        c = raw_input('end? ')
+        c = input('end? ')
         
-    print('-'*50 + 'CODE' + '-'*50)
+    print('-'*25 + 'CODE' + '-'*25)
     for line in code:
         print(line)
+
+    write_code(code)
+    print('-'*25 + 'EOF' + '-'*25)
+    
