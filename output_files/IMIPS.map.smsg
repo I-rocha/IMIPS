@@ -1,0 +1,1 @@
+Warning (10268): Verilog HDL information at IO.v(31): always construct contains both blocking and non-blocking assignments File: D:/ArquivosD/Documents/Quartus/I-MIPS/IO/IO.v Line: 31

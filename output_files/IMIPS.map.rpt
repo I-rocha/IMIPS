@@ -1,0 +1,660 @@
+Analysis & Synthesis report for IMIPS
+Thu Aug 11 14:37:23 2022
+Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. Analysis & Synthesis RAM Summary
+  9. Registers Removed During Synthesis
+ 10. General Register Statistics
+ 11. Registers Packed Into Inferred Megafunctions
+ 12. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 13. Source assignments for IO:io|bin2display:b2d|altsyncram:rom_rtl_0|altsyncram_4a71:auto_generated
+ 14. Parameter Settings for User Entity Instance: IO:io|bin2display:b2d
+ 15. Parameter Settings for User Entity Instance: BR:br0
+ 16. Parameter Settings for Inferred Entity Instance: IO:io|bin2display:b2d|altsyncram:rom_rtl_0
+ 17. altsyncram Parameter Settings by Entity Instance
+ 18. Port Connectivity Checks: "mux2b1:mxcon"
+ 19. Port Connectivity Checks: "adder:pcadder"
+ 20. Port Connectivity Checks: "mux4b32:mxjbturn"
+ 21. Port Connectivity Checks: "timer:tclk|flipflopT:storage_clk"
+ 22. Post-Synthesis Netlist Statistics for Top Partition
+ 23. Elapsed Time Per Partition
+ 24. Analysis & Synthesis Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2020  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and any partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details, at
+https://fpgasoftware.intel.com/eula.
+
+
+
++----------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                     ;
++------------------------------------+---------------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Thu Aug 11 14:37:23 2022       ;
+; Quartus Prime Version              ; 20.1.1 Build 720 11/11/2020 SJ Lite Edition ;
+; Revision Name                      ; IMIPS                                       ;
+; Top-level Entity Name              ; interfaceGeral                              ;
+; Family                             ; Cyclone IV E                                ;
+; Total logic elements               ; 4,502                                       ;
+;     Total combinational functions  ; 2,503                                       ;
+;     Dedicated logic registers      ; 2,139                                       ;
+; Total registers                    ; 2139                                        ;
+; Total pins                         ; 64                                          ;
+; Total virtual pins                 ; 0                                           ;
+; Total memory bits                  ; 458,752                                     ;
+; Embedded Multiplier 9-bit elements ; 0                                           ;
+; Total PLLs                         ; 0                                           ;
++------------------------------------+---------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                              ;
++------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                           ; Setting            ; Default Value      ;
++------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                           ; EP4CE115F29C7      ;                    ;
+; Top-level entity name                                            ; interfaceGeral     ; IMIPS              ;
+; Family name                                                      ; Cyclone IV E       ; Cyclone V          ;
+; Maximum processors allowed for parallel compilation              ; All                ;                    ;
+; Use smart compilation                                            ; Off                ; Off                ;
+; Enable parallel Assembler and Timing Analyzer during compilation ; On                 ; On                 ;
+; Enable compact report table                                      ; Off                ; Off                ;
+; Restructure Multiplexers                                         ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                              ; Off                ; Off                ;
+; Preserve fewer node names                                        ; On                 ; On                 ;
+; Intel FPGA IP Evaluation Mode                                    ; Enable             ; Enable             ;
+; Verilog Version                                                  ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                     ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                         ; Auto               ; Auto               ;
+; Safe State Machine                                               ; Off                ; Off                ;
+; Extract Verilog State Machines                                   ; On                 ; On                 ;
+; Extract VHDL State Machines                                      ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                       ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                   ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                          ; On                 ; On                 ;
+; Infer RAMs from Raw Logic                                        ; On                 ; On                 ;
+; Parallel Synthesis                                               ; On                 ; On                 ;
+; DSP Block Balancing                                              ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                               ; On                 ; On                 ;
+; Power-Up Don't Care                                              ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                     ; Off                ; Off                ;
+; Remove Duplicate Registers                                       ; On                 ; On                 ;
+; Ignore CARRY Buffers                                             ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                           ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                            ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                        ; Off                ; Off                ;
+; Ignore LCELL Buffers                                             ; Off                ; Off                ;
+; Ignore SOFT Buffers                                              ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                   ; Off                ; Off                ;
+; Optimization Technique                                           ; Balanced           ; Balanced           ;
+; Carry Chain Length                                               ; 70                 ; 70                 ;
+; Auto Carry Chains                                                ; On                 ; On                 ;
+; Auto Open-Drain Pins                                             ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                            ; Off                ; Off                ;
+; Auto ROM Replacement                                             ; On                 ; On                 ;
+; Auto RAM Replacement                                             ; On                 ; On                 ;
+; Auto DSP Block Replacement                                       ; On                 ; On                 ;
+; Auto Shift Register Replacement                                  ; Auto               ; Auto               ;
+; Allow Shift Register Merging across Hierarchies                  ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                    ; On                 ; On                 ;
+; Strict RAM Replacement                                           ; Off                ; Off                ;
+; Allow Synchronous Control Signals                                ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                           ; Off                ; Off                ;
+; Auto RAM Block Balancing                                         ; On                 ; On                 ;
+; Auto RAM to Logic Cell Conversion                                ; Off                ; Off                ;
+; Auto Resource Sharing                                            ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                               ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                               ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                    ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing              ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                ; Off                ; Off                ;
+; Timing-Driven Synthesis                                          ; On                 ; On                 ;
+; Report Parameter Settings                                        ; On                 ; On                 ;
+; Report Source Assignments                                        ; On                 ; On                 ;
+; Report Connectivity Checks                                       ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                               ; Off                ; Off                ;
+; Synchronization Register Chain Length                            ; 2                  ; 2                  ;
+; Power Optimization During Synthesis                              ; Normal compilation ; Normal compilation ;
+; HDL message level                                                ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                  ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report         ; 5000               ; 5000               ;
+; Number of Swept Nodes Reported in Synthesis Report               ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report        ; 100                ; 100                ;
+; Clock MUX Protection                                             ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                      ; Off                ; Off                ;
+; Block Design Naming                                              ; Auto               ; Auto               ;
+; SDC constraint protection                                        ; Off                ; Off                ;
+; Synthesis Effort                                                 ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal     ; On                 ; On                 ;
+; Pre-Mapping Resynthesis Optimization                             ; Off                ; Off                ;
+; Analysis & Synthesis Message Level                               ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                      ; Auto               ; Auto               ;
+; Resource Aware Inference For Block RAM                           ; On                 ; On                 ;
++------------------------------------------------------------------+--------------------+--------------------+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 12          ;
+; Maximum allowed            ; 12          ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 8           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
+;     Processor 2            ;   0.0%      ;
+;     Processor 3            ;   0.0%      ;
+;     Processor 4            ;   0.0%      ;
+;     Processor 5            ;   0.0%      ;
+;     Processor 6            ;   0.0%      ;
+;     Processor 7            ;   0.0%      ;
+;     Processor 8            ;   0.0%      ;
++----------------------------+-------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                                                            ;
++--------------------------------------------+-----------------+-------------------------------------------------------+----------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path           ; Used in Netlist ; File Type                                             ; File Name with Absolute Path                                                     ; Library ;
++--------------------------------------------+-----------------+-------------------------------------------------------+----------------------------------------------------------------------------------+---------+
+; bin2display/bin2display.v                  ; yes             ; User Verilog HDL File                                 ; D:/ArquivosD/Documents/Quartus/I-MIPS/bin2display/bin2display.v                  ;         ;
+; interfaceGeral/interfaceGeral.v            ; yes             ; User Verilog HDL File                                 ; D:/ArquivosD/Documents/Quartus/I-MIPS/interfaceGeral/interfaceGeral.v            ;         ;
+; signExtend/signExtend.v                    ; yes             ; User Verilog HDL File                                 ; D:/ArquivosD/Documents/Quartus/I-MIPS/signExtend/signExtend.v                    ;         ;
+; adder/adder.v                              ; yes             ; User Verilog HDL File                                 ; D:/ArquivosD/Documents/Quartus/I-MIPS/adder/adder.v                              ;         ;
+; mux4b32/mux4b32.v                          ; yes             ; User Verilog HDL File                                 ; D:/ArquivosD/Documents/Quartus/I-MIPS/mux4b32/mux4b32.v                          ;         ;
+; mux2b32/mux2b32.v                          ; yes             ; User Verilog HDL File                                 ; D:/ArquivosD/Documents/Quartus/I-MIPS/mux2b32/mux2b32.v                          ;         ;
+; mux2b1/mux2b1.v                            ; yes             ; User Verilog HDL File                                 ; D:/ArquivosD/Documents/Quartus/I-MIPS/mux2b1/mux2b1.v                            ;         ;
+; ULAS/ULAS.v                                ; yes             ; User Verilog HDL File                                 ; D:/ArquivosD/Documents/Quartus/I-MIPS/ULAS/ULAS.v                                ;         ;
+; BR/BR.v                                    ; yes             ; User Verilog HDL File                                 ; D:/ArquivosD/Documents/Quartus/I-MIPS/BR/BR.v                                    ;         ;
+; MI/MI.v                                    ; yes             ; User Verilog HDL File                                 ; D:/ArquivosD/Documents/Quartus/I-MIPS/MI/MI.v                                    ;         ;
+; MD/MD.v                                    ; yes             ; User Verilog HDL File                                 ; D:/ArquivosD/Documents/Quartus/I-MIPS/MD/MD.v                                    ;         ;
+; mux2b16/mux2b16.v                          ; yes             ; User Verilog HDL File                                 ; D:/ArquivosD/Documents/Quartus/I-MIPS/mux2b16/mux2b16.v                          ;         ;
+; UC/UC.v                                    ; yes             ; User Verilog HDL File                                 ; D:/ArquivosD/Documents/Quartus/I-MIPS/UC/UC.v                                    ;         ;
+; PC/PC.v                                    ; yes             ; User Verilog HDL File                                 ; D:/ArquivosD/Documents/Quartus/I-MIPS/PC/PC.v                                    ;         ;
+; flipflopT/flipflopT.v                      ; yes             ; User Verilog HDL File                                 ; D:/ArquivosD/Documents/Quartus/I-MIPS/flipflopT/flipflopT.v                      ;         ;
+; debounce/debounce.v                        ; yes             ; User Verilog HDL File                                 ; D:/ArquivosD/Documents/Quartus/I-MIPS/debounce/debounce.v                        ;         ;
+; timer/timer.v                              ; yes             ; User Verilog HDL File                                 ; D:/ArquivosD/Documents/Quartus/I-MIPS/timer/timer.v                              ;         ;
+; IO/IO.v                                    ; yes             ; User Verilog HDL File                                 ; D:/ArquivosD/Documents/Quartus/I-MIPS/IO/IO.v                                    ;         ;
+; divisor/divisor.v                          ; yes             ; User Verilog HDL File                                 ; D:/ArquivosD/Documents/Quartus/I-MIPS/divisor/divisor.v                          ;         ;
+; bin2display/bin2display.txt                ; yes             ; Auto-Found File                                       ; D:/ArquivosD/Documents/Quartus/I-MIPS/bin2display/bin2display.txt                ;         ;
+; altsyncram.tdf                             ; yes             ; Megafunction                                          ; d:/intelfpga_lite/20.1/quartus/libraries/megafunctions/altsyncram.tdf            ;         ;
+; stratix_ram_block.inc                      ; yes             ; Megafunction                                          ; d:/intelfpga_lite/20.1/quartus/libraries/megafunctions/stratix_ram_block.inc     ;         ;
+; lpm_mux.inc                                ; yes             ; Megafunction                                          ; d:/intelfpga_lite/20.1/quartus/libraries/megafunctions/lpm_mux.inc               ;         ;
+; lpm_decode.inc                             ; yes             ; Megafunction                                          ; d:/intelfpga_lite/20.1/quartus/libraries/megafunctions/lpm_decode.inc            ;         ;
+; aglobal201.inc                             ; yes             ; Megafunction                                          ; d:/intelfpga_lite/20.1/quartus/libraries/megafunctions/aglobal201.inc            ;         ;
+; a_rdenreg.inc                              ; yes             ; Megafunction                                          ; d:/intelfpga_lite/20.1/quartus/libraries/megafunctions/a_rdenreg.inc             ;         ;
+; altrom.inc                                 ; yes             ; Megafunction                                          ; d:/intelfpga_lite/20.1/quartus/libraries/megafunctions/altrom.inc                ;         ;
+; altram.inc                                 ; yes             ; Megafunction                                          ; d:/intelfpga_lite/20.1/quartus/libraries/megafunctions/altram.inc                ;         ;
+; altdpram.inc                               ; yes             ; Megafunction                                          ; d:/intelfpga_lite/20.1/quartus/libraries/megafunctions/altdpram.inc              ;         ;
+; db/altsyncram_4a71.tdf                     ; yes             ; Auto-Generated Megafunction                           ; D:/ArquivosD/Documents/Quartus/I-MIPS/db/altsyncram_4a71.tdf                     ;         ;
+; db/imips.ram0_bin2display_17f60e6d.hdl.mif ; yes             ; Auto-Generated Auto-Found Memory Initialization File  ; D:/ArquivosD/Documents/Quartus/I-MIPS/db/imips.ram0_bin2display_17f60e6d.hdl.mif ;         ;
+; db/decode_c8a.tdf                          ; yes             ; Auto-Generated Megafunction                           ; D:/ArquivosD/Documents/Quartus/I-MIPS/db/decode_c8a.tdf                          ;         ;
+; db/mux_lob.tdf                             ; yes             ; Auto-Generated Megafunction                           ; D:/ArquivosD/Documents/Quartus/I-MIPS/db/mux_lob.tdf                             ;         ;
++--------------------------------------------+-----------------+-------------------------------------------------------+----------------------------------------------------------------------------------+---------+
+
+
++------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary                                        ;
++---------------------------------------------+--------------------------------------+
+; Resource                                    ; Usage                                ;
++---------------------------------------------+--------------------------------------+
+; Estimated Total logic elements              ; 4,502                                ;
+;                                             ;                                      ;
+; Total combinational functions               ; 2503                                 ;
+; Logic element usage by number of LUT inputs ;                                      ;
+;     -- 4 input functions                    ; 2020                                 ;
+;     -- 3 input functions                    ; 330                                  ;
+;     -- <=2 input functions                  ; 153                                  ;
+;                                             ;                                      ;
+; Logic elements by mode                      ;                                      ;
+;     -- normal mode                          ; 2294                                 ;
+;     -- arithmetic mode                      ; 209                                  ;
+;                                             ;                                      ;
+; Total registers                             ; 2139                                 ;
+;     -- Dedicated logic registers            ; 2139                                 ;
+;     -- I/O registers                        ; 0                                    ;
+;                                             ;                                      ;
+; I/O pins                                    ; 64                                   ;
+; Total memory bits                           ; 458752                               ;
+;                                             ;                                      ;
+; Embedded Multiplier 9-bit elements          ; 0                                    ;
+;                                             ;                                      ;
+; Maximum fan-out node                        ; timer:tclk|flipflopT:storage_clk|out ;
+; Maximum fan-out                             ; 2084                                 ;
+; Total fan-out                               ; 16800                                ;
+; Average fan-out                             ; 3.48                                 ;
++---------------------------------------------+--------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                               ;
++----------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------------------------------+-----------------+--------------+
+; Compilation Hierarchy Node                   ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                    ; Entity Name     ; Library Name ;
++----------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------------------------------+-----------------+--------------+
+; |interfaceGeral                              ; 2503 (4)            ; 2139 (0)                  ; 458752      ; 0            ; 0       ; 0         ; 64   ; 0            ; |interfaceGeral                                                                                        ; interfaceGeral  ; work         ;
+;    |BR:br0|                                  ; 1252 (1252)         ; 1025 (1025)               ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |interfaceGeral|BR:br0                                                                                 ; BR              ; work         ;
+;    |IO:io|                                   ; 34 (3)              ; 33 (29)                   ; 458752      ; 0            ; 0       ; 0         ; 0    ; 0            ; |interfaceGeral|IO:io                                                                                  ; IO              ; work         ;
+;       |bin2display:b2d|                      ; 28 (0)              ; 1 (0)                     ; 458752      ; 0            ; 0       ; 0         ; 0    ; 0            ; |interfaceGeral|IO:io|bin2display:b2d                                                                  ; bin2display     ; work         ;
+;          |altsyncram:rom_rtl_0|              ; 28 (0)              ; 1 (0)                     ; 458752      ; 0            ; 0       ; 0         ; 0    ; 0            ; |interfaceGeral|IO:io|bin2display:b2d|altsyncram:rom_rtl_0                                             ; altsyncram      ; work         ;
+;             |altsyncram_4a71:auto_generated| ; 28 (0)              ; 1 (1)                     ; 458752      ; 0            ; 0       ; 0         ; 0    ; 0            ; |interfaceGeral|IO:io|bin2display:b2d|altsyncram:rom_rtl_0|altsyncram_4a71:auto_generated              ; altsyncram_4a71 ; work         ;
+;                |mux_lob:mux2|                ; 28 (28)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |interfaceGeral|IO:io|bin2display:b2d|altsyncram:rom_rtl_0|altsyncram_4a71:auto_generated|mux_lob:mux2 ; mux_lob         ; work         ;
+;       |debounce:db|                          ; 3 (0)               ; 3 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |interfaceGeral|IO:io|debounce:db                                                                      ; debounce        ; work         ;
+;          |flipflopT:f0|                      ; 1 (1)               ; 1 (1)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |interfaceGeral|IO:io|debounce:db|flipflopT:f0                                                         ; flipflopT       ; work         ;
+;          |flipflopT:f1|                      ; 1 (1)               ; 1 (1)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |interfaceGeral|IO:io|debounce:db|flipflopT:f1                                                         ; flipflopT       ; work         ;
+;          |flipflopT:f2|                      ; 1 (1)               ; 1 (1)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |interfaceGeral|IO:io|debounce:db|flipflopT:f2                                                         ; flipflopT       ; work         ;
+;    |MD:md0|                                  ; 722 (722)           ; 1024 (1024)               ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |interfaceGeral|MD:md0                                                                                 ; MD              ; work         ;
+;    |MI:mi|                                   ; 35 (35)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |interfaceGeral|MI:mi                                                                                  ; MI              ; work         ;
+;    |PC:pc0|                                  ; 33 (33)             ; 32 (32)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |interfaceGeral|PC:pc0                                                                                 ; PC              ; work         ;
+;    |UC:uc0|                                  ; 38 (38)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |interfaceGeral|UC:uc0                                                                                 ; UC              ; work         ;
+;    |ULAS:ulas0|                              ; 210 (210)           ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |interfaceGeral|ULAS:ulas0                                                                             ; ULAS            ; work         ;
+;    |adder:pcadder|                           ; 32 (32)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |interfaceGeral|adder:pcadder                                                                          ; adder           ; work         ;
+;    |divisor:dv|                              ; 33 (33)             ; 24 (24)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |interfaceGeral|divisor:dv                                                                             ; divisor         ; work         ;
+;    |mux2b16:mximmop|                         ; 13 (13)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |interfaceGeral|mux2b16:mximmop                                                                        ; mux2b16         ; work         ;
+;    |mux2b32:mxdataop|                        ; 32 (32)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |interfaceGeral|mux2b32:mxdataop                                                                       ; mux2b32         ; work         ;
+;    |mux2b32:mxinop|                          ; 32 (32)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |interfaceGeral|mux2b32:mxinop                                                                         ; mux2b32         ; work         ;
+;    |mux4b32:mxjbturn|                        ; 32 (32)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |interfaceGeral|mux4b32:mxjbturn                                                                       ; mux4b32         ; work         ;
+;    |timer:tclk|                              ; 1 (0)               ; 1 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |interfaceGeral|timer:tclk                                                                             ; timer           ; work         ;
+;       |flipflopT:storage_clk|                ; 1 (1)               ; 1 (1)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |interfaceGeral|timer:tclk|flipflopT:storage_clk                                                       ; flipflopT       ; work         ;
++----------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------------------------------+-----------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis RAM Summary                                                                                                                                                                                     ;
++--------------------------------------------------------------------------------------+------+------+--------------+--------------+--------------+--------------+--------+--------------------------------------------+
+; Name                                                                                 ; Type ; Mode ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Size   ; MIF                                        ;
++--------------------------------------------------------------------------------------+------+------+--------------+--------------+--------------+--------------+--------+--------------------------------------------+
+; IO:io|bin2display:b2d|altsyncram:rom_rtl_0|altsyncram_4a71:auto_generated|ALTSYNCRAM ; AUTO ; ROM  ; 16384        ; 28           ; --           ; --           ; 458752 ; db/IMIPS.ram0_bin2display_17f60e6d.hdl.mif ;
++--------------------------------------------------------------------------------------+------+------+--------------+--------------+--------------+--------------+--------+--------------------------------------------+
+
+
++---------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                              ;
++----------------------------------------+----------------------------------------+
+; Register name                          ; Reason for Removal                     ;
++----------------------------------------+----------------------------------------+
+; IO:io|inbuff[14..31]                   ; Stuck at GND due to stuck port data_in ;
+; Total Number of Removed Registers = 18 ;                                        ;
++----------------------------------------+----------------------------------------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 2139  ;
+; Number of registers using Synchronous Clear  ; 32    ;
+; Number of registers using Synchronous Load   ; 32    ;
+; Number of registers using Asynchronous Clear ; 27    ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 2076  ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++----------------------------------------------------------------------------+
+; Registers Packed Into Inferred Megafunctions                               ;
++-----------------------------------+---------------------------------+------+
+; Register Name                     ; Megafunction                    ; Type ;
++-----------------------------------+---------------------------------+------+
+; IO:io|bin2display:b2d|data[0..27] ; IO:io|bin2display:b2d|rom_rtl_0 ; RAM  ;
++-----------------------------------+---------------------------------+------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                 ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output       ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------+
+; 4:1                ; 32 bits   ; 64 LEs        ; 64 LEs               ; 0 LEs                  ; Yes        ; |interfaceGeral|PC:pc0|regPC[23] ;
+; 3:1                ; 5 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; No         ; |interfaceGeral|BR:br0|register  ;
+; 58:1               ; 2 bits    ; 76 LEs        ; 16 LEs               ; 60 LEs                 ; No         ; |interfaceGeral|UC:uc0|Mux10     ;
+; 13:1               ; 4 bits    ; 32 LEs        ; 24 LEs               ; 8 LEs                  ; No         ; |interfaceGeral|ULAS:ulas0|Mux30 ;
+; 15:1               ; 11 bits   ; 110 LEs       ; 66 LEs               ; 44 LEs                 ; No         ; |interfaceGeral|BR:br0|register  ;
+; 16:1               ; 16 bits   ; 160 LEs       ; 112 LEs              ; 48 LEs                 ; No         ; |interfaceGeral|BR:br0|register  ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------+
+
+
++--------------------------------------------------------------------------------------------------+
+; Source assignments for IO:io|bin2display:b2d|altsyncram:rom_rtl_0|altsyncram_4a71:auto_generated ;
++---------------------------------+--------------------+------+------------------------------------+
+; Assignment                      ; Value              ; From ; To                                 ;
++---------------------------------+--------------------+------+------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                  ;
++---------------------------------+--------------------+------+------------------------------------+
+
+
++--------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: IO:io|bin2display:b2d ;
++----------------+-------+-------------------------------------------+
+; Parameter Name ; Value ; Type                                      ;
++----------------+-------+-------------------------------------------+
+; DATA_WIDTH     ; 28    ; Signed Integer                            ;
+; ADDR_WIDTH     ; 14    ; Signed Integer                            ;
++----------------+-------+-------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------+
+; Parameter Settings for User Entity Instance: BR:br0 ;
++----------------+-------+----------------------------+
+; Parameter Name ; Value ; Type                       ;
++----------------+-------+----------------------------+
+; AJ             ; 11111 ; Unsigned Binary            ;
++----------------+-------+----------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: IO:io|bin2display:b2d|altsyncram:rom_rtl_0      ;
++------------------------------------+--------------------------------------------+----------------+
+; Parameter Name                     ; Value                                      ; Type           ;
++------------------------------------+--------------------------------------------+----------------+
+; BYTE_SIZE_BLOCK                    ; 8                                          ; Untyped        ;
+; AUTO_CARRY_CHAINS                  ; ON                                         ; AUTO_CARRY     ;
+; IGNORE_CARRY_BUFFERS               ; OFF                                        ; IGNORE_CARRY   ;
+; AUTO_CASCADE_CHAINS                ; ON                                         ; AUTO_CASCADE   ;
+; IGNORE_CASCADE_BUFFERS             ; OFF                                        ; IGNORE_CASCADE ;
+; WIDTH_BYTEENA                      ; 1                                          ; Untyped        ;
+; OPERATION_MODE                     ; ROM                                        ; Untyped        ;
+; WIDTH_A                            ; 28                                         ; Untyped        ;
+; WIDTHAD_A                          ; 14                                         ; Untyped        ;
+; NUMWORDS_A                         ; 16384                                      ; Untyped        ;
+; OUTDATA_REG_A                      ; UNREGISTERED                               ; Untyped        ;
+; ADDRESS_ACLR_A                     ; NONE                                       ; Untyped        ;
+; OUTDATA_ACLR_A                     ; NONE                                       ; Untyped        ;
+; WRCONTROL_ACLR_A                   ; NONE                                       ; Untyped        ;
+; INDATA_ACLR_A                      ; NONE                                       ; Untyped        ;
+; BYTEENA_ACLR_A                     ; NONE                                       ; Untyped        ;
+; WIDTH_B                            ; 1                                          ; Untyped        ;
+; WIDTHAD_B                          ; 1                                          ; Untyped        ;
+; NUMWORDS_B                         ; 1                                          ; Untyped        ;
+; INDATA_REG_B                       ; CLOCK1                                     ; Untyped        ;
+; WRCONTROL_WRADDRESS_REG_B          ; CLOCK1                                     ; Untyped        ;
+; RDCONTROL_REG_B                    ; CLOCK1                                     ; Untyped        ;
+; ADDRESS_REG_B                      ; CLOCK1                                     ; Untyped        ;
+; OUTDATA_REG_B                      ; UNREGISTERED                               ; Untyped        ;
+; BYTEENA_REG_B                      ; CLOCK1                                     ; Untyped        ;
+; INDATA_ACLR_B                      ; NONE                                       ; Untyped        ;
+; WRCONTROL_ACLR_B                   ; NONE                                       ; Untyped        ;
+; ADDRESS_ACLR_B                     ; NONE                                       ; Untyped        ;
+; OUTDATA_ACLR_B                     ; NONE                                       ; Untyped        ;
+; RDCONTROL_ACLR_B                   ; NONE                                       ; Untyped        ;
+; BYTEENA_ACLR_B                     ; NONE                                       ; Untyped        ;
+; WIDTH_BYTEENA_A                    ; 1                                          ; Untyped        ;
+; WIDTH_BYTEENA_B                    ; 1                                          ; Untyped        ;
+; RAM_BLOCK_TYPE                     ; AUTO                                       ; Untyped        ;
+; BYTE_SIZE                          ; 8                                          ; Untyped        ;
+; READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE                                  ; Untyped        ;
+; READ_DURING_WRITE_MODE_PORT_A      ; NEW_DATA_NO_NBE_READ                       ; Untyped        ;
+; READ_DURING_WRITE_MODE_PORT_B      ; NEW_DATA_NO_NBE_READ                       ; Untyped        ;
+; INIT_FILE                          ; db/IMIPS.ram0_bin2display_17f60e6d.hdl.mif ; Untyped        ;
+; INIT_FILE_LAYOUT                   ; PORT_A                                     ; Untyped        ;
+; MAXIMUM_DEPTH                      ; 0                                          ; Untyped        ;
+; CLOCK_ENABLE_INPUT_A               ; NORMAL                                     ; Untyped        ;
+; CLOCK_ENABLE_INPUT_B               ; NORMAL                                     ; Untyped        ;
+; CLOCK_ENABLE_OUTPUT_A              ; NORMAL                                     ; Untyped        ;
+; CLOCK_ENABLE_OUTPUT_B              ; NORMAL                                     ; Untyped        ;
+; CLOCK_ENABLE_CORE_A                ; USE_INPUT_CLKEN                            ; Untyped        ;
+; CLOCK_ENABLE_CORE_B                ; USE_INPUT_CLKEN                            ; Untyped        ;
+; ENABLE_ECC                         ; FALSE                                      ; Untyped        ;
+; ECC_PIPELINE_STAGE_ENABLED         ; FALSE                                      ; Untyped        ;
+; WIDTH_ECCSTATUS                    ; 3                                          ; Untyped        ;
+; DEVICE_FAMILY                      ; Cyclone IV E                               ; Untyped        ;
+; CBXI_PARAMETER                     ; altsyncram_4a71                            ; Untyped        ;
++------------------------------------+--------------------------------------------+----------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------+
+; altsyncram Parameter Settings by Entity Instance                                       ;
++-------------------------------------------+--------------------------------------------+
+; Name                                      ; Value                                      ;
++-------------------------------------------+--------------------------------------------+
+; Number of entity instances                ; 1                                          ;
+; Entity Instance                           ; IO:io|bin2display:b2d|altsyncram:rom_rtl_0 ;
+;     -- OPERATION_MODE                     ; ROM                                        ;
+;     -- WIDTH_A                            ; 28                                         ;
+;     -- NUMWORDS_A                         ; 16384                                      ;
+;     -- OUTDATA_REG_A                      ; UNREGISTERED                               ;
+;     -- WIDTH_B                            ; 1                                          ;
+;     -- NUMWORDS_B                         ; 1                                          ;
+;     -- ADDRESS_REG_B                      ; CLOCK1                                     ;
+;     -- OUTDATA_REG_B                      ; UNREGISTERED                               ;
+;     -- RAM_BLOCK_TYPE                     ; AUTO                                       ;
+;     -- READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE                                  ;
++-------------------------------------------+--------------------------------------------+
+
+
++------------------------------------------+
+; Port Connectivity Checks: "mux2b1:mxcon" ;
++------+-------+----------+----------------+
+; Port ; Type  ; Severity ; Details        ;
++------+-------+----------+----------------+
+; in0  ; Input ; Info     ; Stuck at VCC   ;
++------+-------+----------+----------------+
+
+
++----------------------------------------------+
+; Port Connectivity Checks: "adder:pcadder"    ;
++------------+-------+----------+--------------+
+; Port       ; Type  ; Severity ; Details      ;
++------------+-------+----------+--------------+
+; in1[31..1] ; Input ; Info     ; Stuck at GND ;
+; in1[0]     ; Input ; Info     ; Stuck at VCC ;
++------------+-------+----------+--------------+
+
+
++----------------------------------------------+
+; Port Connectivity Checks: "mux4b32:mxjbturn" ;
++------+-------+----------+--------------------+
+; Port ; Type  ; Severity ; Details            ;
++------+-------+----------+--------------------+
+; in3  ; Input ; Info     ; Stuck at GND       ;
++------+-------+----------+--------------------+
+
+
++--------------------------------------------------------------+
+; Port Connectivity Checks: "timer:tclk|flipflopT:storage_clk" ;
++--------+-------+----------+----------------------------------+
+; Port   ; Type  ; Severity ; Details                          ;
++--------+-------+----------+----------------------------------+
+; nclear ; Input ; Info     ; Stuck at VCC                     ;
++--------+-------+----------+----------------------------------+
+
+
++-----------------------------------------------------+
+; Post-Synthesis Netlist Statistics for Top Partition ;
++-----------------------+-----------------------------+
+; Type                  ; Count                       ;
++-----------------------+-----------------------------+
+; boundary_port         ; 64                          ;
+; cycloneiii_ff         ; 2139                        ;
+;     CLR               ; 27                          ;
+;     ENA               ; 2076                        ;
+;     SCLR SLD          ; 32                          ;
+;     plain             ; 4                           ;
+; cycloneiii_lcell_comb ; 2505                        ;
+;     arith             ; 209                         ;
+;         2 data inputs ; 54                          ;
+;         3 data inputs ; 155                         ;
+;     normal            ; 2296                        ;
+;         0 data inputs ; 1                           ;
+;         1 data inputs ; 4                           ;
+;         2 data inputs ; 96                          ;
+;         3 data inputs ; 175                         ;
+;         4 data inputs ; 2020                        ;
+; cycloneiii_ram_block  ; 56                          ;
+;                       ;                             ;
+; Max LUT depth         ; 20.20                       ;
+; Average LUT depth     ; 12.30                       ;
++-----------------------+-----------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:11     ;
++----------------+--------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus Prime Analysis & Synthesis
+    Info: Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
+    Info: Processing started: Thu Aug 11 14:36:50 2022
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off IMIPS -c IMIPS
+Info (20030): Parallel compilation is enabled and will use 12 of the 12 processors detected
+Info (12021): Found 1 design units, including 1 entities, in source file bin2display/bin2display.v
+    Info (12023): Found entity 1: bin2display File: D:/ArquivosD/Documents/Quartus/I-MIPS/bin2display/bin2display.v Line: 6
+Info (12021): Found 1 design units, including 1 entities, in source file interfacegeral/interfacegeral.v
+    Info (12023): Found entity 1: interfaceGeral File: D:/ArquivosD/Documents/Quartus/I-MIPS/interfaceGeral/interfaceGeral.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file signextend/signextend.v
+    Info (12023): Found entity 1: signExtend File: D:/ArquivosD/Documents/Quartus/I-MIPS/signExtend/signExtend.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file adder/adder.v
+    Info (12023): Found entity 1: adder File: D:/ArquivosD/Documents/Quartus/I-MIPS/adder/adder.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file mux4b32/mux4b32.v
+    Info (12023): Found entity 1: mux4b32 File: D:/ArquivosD/Documents/Quartus/I-MIPS/mux4b32/mux4b32.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file mux2b32/mux2b32.v
+    Info (12023): Found entity 1: mux2b32 File: D:/ArquivosD/Documents/Quartus/I-MIPS/mux2b32/mux2b32.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file mux2b1/mux2b1.v
+    Info (12023): Found entity 1: mux2b1 File: D:/ArquivosD/Documents/Quartus/I-MIPS/mux2b1/mux2b1.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file ulas/ulas.v
+    Info (12023): Found entity 1: ULAS File: D:/ArquivosD/Documents/Quartus/I-MIPS/ULAS/ULAS.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file br/br.v
+    Info (12023): Found entity 1: BR File: D:/ArquivosD/Documents/Quartus/I-MIPS/BR/BR.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file mi/mi.v
+    Info (12023): Found entity 1: MI File: D:/ArquivosD/Documents/Quartus/I-MIPS/MI/MI.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file md/md.v
+    Info (12023): Found entity 1: MD File: D:/ArquivosD/Documents/Quartus/I-MIPS/MD/MD.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file mux2b16/mux2b16.v
+    Info (12023): Found entity 1: mux2b16 File: D:/ArquivosD/Documents/Quartus/I-MIPS/mux2b16/mux2b16.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file uc/uc.v
+    Info (12023): Found entity 1: UC File: D:/ArquivosD/Documents/Quartus/I-MIPS/UC/UC.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file pc/pc.v
+    Info (12023): Found entity 1: PC File: D:/ArquivosD/Documents/Quartus/I-MIPS/PC/PC.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file flipflopt/flipflopt.v
+    Info (12023): Found entity 1: flipflopT File: D:/ArquivosD/Documents/Quartus/I-MIPS/flipflopT/flipflopT.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file debounce/debounce.v
+    Info (12023): Found entity 1: debounce File: D:/ArquivosD/Documents/Quartus/I-MIPS/debounce/debounce.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file timer/timer.v
+    Info (12023): Found entity 1: timer File: D:/ArquivosD/Documents/Quartus/I-MIPS/timer/timer.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file io/io.v
+    Info (12023): Found entity 1: IO File: D:/ArquivosD/Documents/Quartus/I-MIPS/IO/IO.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file divisor/divisor.v
+    Info (12023): Found entity 1: divisor File: D:/ArquivosD/Documents/Quartus/I-MIPS/divisor/divisor.v Line: 1
+Info (12127): Elaborating entity "interfaceGeral" for the top level hierarchy
+Warning (10858): Verilog HDL warning at interfaceGeral.v(40): object io_clk used but never assigned File: D:/ArquivosD/Documents/Quartus/I-MIPS/interfaceGeral/interfaceGeral.v Line: 40
+Warning (10030): Net "io_clk" at interfaceGeral.v(40) has no driver or initial value, using a default initial value '0' File: D:/ArquivosD/Documents/Quartus/I-MIPS/interfaceGeral/interfaceGeral.v Line: 40
+Info (12128): Elaborating entity "divisor" for hierarchy "divisor:dv" File: D:/ArquivosD/Documents/Quartus/I-MIPS/interfaceGeral/interfaceGeral.v Line: 110
+Warning (10230): Verilog HDL assignment warning at divisor.v(19): truncated value with size 32 to match size of target (24) File: D:/ArquivosD/Documents/Quartus/I-MIPS/divisor/divisor.v Line: 19
+Info (12128): Elaborating entity "timer" for hierarchy "timer:tclk" File: D:/ArquivosD/Documents/Quartus/I-MIPS/interfaceGeral/interfaceGeral.v Line: 112
+Info (12128): Elaborating entity "flipflopT" for hierarchy "timer:tclk|flipflopT:storage_clk" File: D:/ArquivosD/Documents/Quartus/I-MIPS/timer/timer.v Line: 7
+Info (12128): Elaborating entity "IO" for hierarchy "IO:io" File: D:/ArquivosD/Documents/Quartus/I-MIPS/interfaceGeral/interfaceGeral.v Line: 115
+Info (12128): Elaborating entity "debounce" for hierarchy "IO:io|debounce:db" File: D:/ArquivosD/Documents/Quartus/I-MIPS/IO/IO.v Line: 28
+Info (12128): Elaborating entity "bin2display" for hierarchy "IO:io|bin2display:b2d" File: D:/ArquivosD/Documents/Quartus/I-MIPS/IO/IO.v Line: 83
+Warning (10030): Net "rom.data_a" at bin2display.v(15) has no driver or initial value, using a default initial value '0' File: D:/ArquivosD/Documents/Quartus/I-MIPS/bin2display/bin2display.v Line: 15
+Warning (10030): Net "rom.waddr_a" at bin2display.v(15) has no driver or initial value, using a default initial value '0' File: D:/ArquivosD/Documents/Quartus/I-MIPS/bin2display/bin2display.v Line: 15
+Warning (10030): Net "rom.we_a" at bin2display.v(15) has no driver or initial value, using a default initial value '0' File: D:/ArquivosD/Documents/Quartus/I-MIPS/bin2display/bin2display.v Line: 15
+Info (12128): Elaborating entity "mux2b32" for hierarchy "mux2b32:mxinop" File: D:/ArquivosD/Documents/Quartus/I-MIPS/interfaceGeral/interfaceGeral.v Line: 118
+Info (12128): Elaborating entity "mux4b32" for hierarchy "mux4b32:mxjbturn" File: D:/ArquivosD/Documents/Quartus/I-MIPS/interfaceGeral/interfaceGeral.v Line: 121
+Info (12128): Elaborating entity "PC" for hierarchy "PC:pc0" File: D:/ArquivosD/Documents/Quartus/I-MIPS/interfaceGeral/interfaceGeral.v Line: 128
+Info (12128): Elaborating entity "adder" for hierarchy "adder:pcadder" File: D:/ArquivosD/Documents/Quartus/I-MIPS/interfaceGeral/interfaceGeral.v Line: 135
+Info (12128): Elaborating entity "MI" for hierarchy "MI:mi" File: D:/ArquivosD/Documents/Quartus/I-MIPS/interfaceGeral/interfaceGeral.v Line: 141
+Warning (10030): Net "mem_i.data_a" at MI.v(11) has no driver or initial value, using a default initial value '0' File: D:/ArquivosD/Documents/Quartus/I-MIPS/MI/MI.v Line: 11
+Warning (10030): Net "mem_i.waddr_a" at MI.v(11) has no driver or initial value, using a default initial value '0' File: D:/ArquivosD/Documents/Quartus/I-MIPS/MI/MI.v Line: 11
+Warning (10030): Net "mem_i.we_a" at MI.v(11) has no driver or initial value, using a default initial value '0' File: D:/ArquivosD/Documents/Quartus/I-MIPS/MI/MI.v Line: 11
+Info (12128): Elaborating entity "UC" for hierarchy "UC:uc0" File: D:/ArquivosD/Documents/Quartus/I-MIPS/interfaceGeral/interfaceGeral.v Line: 159
+Info (12128): Elaborating entity "mux2b1" for hierarchy "mux2b1:mxcon" File: D:/ArquivosD/Documents/Quartus/I-MIPS/interfaceGeral/interfaceGeral.v Line: 162
+Info (12128): Elaborating entity "BR" for hierarchy "BR:br0" File: D:/ArquivosD/Documents/Quartus/I-MIPS/interfaceGeral/interfaceGeral.v Line: 183
+Info (12128): Elaborating entity "mux2b16" for hierarchy "mux2b16:mximmop" File: D:/ArquivosD/Documents/Quartus/I-MIPS/interfaceGeral/interfaceGeral.v Line: 186
+Info (12128): Elaborating entity "signExtend" for hierarchy "signExtend:signextend0" File: D:/ArquivosD/Documents/Quartus/I-MIPS/interfaceGeral/interfaceGeral.v Line: 189
+Info (12128): Elaborating entity "ULAS" for hierarchy "ULAS:ulas0" File: D:/ArquivosD/Documents/Quartus/I-MIPS/interfaceGeral/interfaceGeral.v Line: 205
+Info (12128): Elaborating entity "MD" for hierarchy "MD:md0" File: D:/ArquivosD/Documents/Quartus/I-MIPS/interfaceGeral/interfaceGeral.v Line: 214
+Info (276014): Found 2 instances of uninferred RAM logic
+    Info (276007): RAM logic "BR:br0|register" is uninferred due to asynchronous read logic File: D:/ArquivosD/Documents/Quartus/I-MIPS/BR/BR.v Line: 18
+    Info (276007): RAM logic "MD:md0|mem_d" is uninferred due to asynchronous read logic File: D:/ArquivosD/Documents/Quartus/I-MIPS/MD/MD.v Line: 14
+Warning (127007): Memory Initialization File or Hexadecimal (Intel-Format) File "D:/ArquivosD/Documents/Quartus/I-MIPS/db/IMIPS.ram0_MI_9b1.hdl.mif" contains "don't care" values -- overwriting them with 0s
+Info (19000): Inferred 1 megafunctions from design logic
+    Info (276029): Inferred altsyncram megafunction from the following design logic: "IO:io|bin2display:b2d|rom_rtl_0" 
+        Info (286033): Parameter OPERATION_MODE set to ROM
+        Info (286033): Parameter WIDTH_A set to 28
+        Info (286033): Parameter WIDTHAD_A set to 14
+        Info (286033): Parameter NUMWORDS_A set to 16384
+        Info (286033): Parameter OUTDATA_REG_A set to UNREGISTERED
+        Info (286033): Parameter ADDRESS_ACLR_A set to NONE
+        Info (286033): Parameter OUTDATA_ACLR_A set to NONE
+        Info (286033): Parameter INDATA_ACLR_A set to NONE
+        Info (286033): Parameter WRCONTROL_ACLR_A set to NONE
+        Info (286033): Parameter INIT_FILE set to db/IMIPS.ram0_bin2display_17f60e6d.hdl.mif
+Info (12130): Elaborated megafunction instantiation "IO:io|bin2display:b2d|altsyncram:rom_rtl_0"
+Info (12133): Instantiated megafunction "IO:io|bin2display:b2d|altsyncram:rom_rtl_0" with the following parameter:
+    Info (12134): Parameter "OPERATION_MODE" = "ROM"
+    Info (12134): Parameter "WIDTH_A" = "28"
+    Info (12134): Parameter "WIDTHAD_A" = "14"
+    Info (12134): Parameter "NUMWORDS_A" = "16384"
+    Info (12134): Parameter "OUTDATA_REG_A" = "UNREGISTERED"
+    Info (12134): Parameter "ADDRESS_ACLR_A" = "NONE"
+    Info (12134): Parameter "OUTDATA_ACLR_A" = "NONE"
+    Info (12134): Parameter "INDATA_ACLR_A" = "NONE"
+    Info (12134): Parameter "WRCONTROL_ACLR_A" = "NONE"
+    Info (12134): Parameter "INIT_FILE" = "db/IMIPS.ram0_bin2display_17f60e6d.hdl.mif"
+Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_4a71.tdf
+    Info (12023): Found entity 1: altsyncram_4a71 File: D:/ArquivosD/Documents/Quartus/I-MIPS/db/altsyncram_4a71.tdf Line: 32
+Info (12021): Found 1 design units, including 1 entities, in source file db/decode_c8a.tdf
+    Info (12023): Found entity 1: decode_c8a File: D:/ArquivosD/Documents/Quartus/I-MIPS/db/decode_c8a.tdf Line: 23
+Info (12021): Found 1 design units, including 1 entities, in source file db/mux_lob.tdf
+    Info (12023): Found entity 1: mux_lob File: D:/ArquivosD/Documents/Quartus/I-MIPS/db/mux_lob.tdf Line: 23
+Warning (13024): Output pins are stuck at VCC or GND
+    Warning (13410): Pin "outio_clk" is stuck at GND File: D:/ArquivosD/Documents/Quartus/I-MIPS/interfaceGeral/interfaceGeral.v Line: 34
+Info (286030): Timing-Driven Synthesis is running
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Info (21057): Implemented 4700 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 17 input pins
+    Info (21059): Implemented 47 output pins
+    Info (21061): Implemented 4580 logic cells
+    Info (21064): Implemented 56 RAM segments
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 12 warnings
+    Info: Peak virtual memory: 4801 megabytes
+    Info: Processing ended: Thu Aug 11 14:37:24 2022
+    Info: Elapsed time: 00:00:34
+    Info: Total CPU time (on all processors): 00:00:35
+
+
