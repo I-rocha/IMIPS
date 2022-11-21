@@ -6,5 +6,5 @@ Os arquivos db, incremental_db, output_files, IMIPS.qpf, IMIPS.qsf, IMIPS.sdc, I
 Arquivos de simulção
 Arquivo *.vwf pertencem a arquivos de simulação do formato de onda. Podem não rodar devido ao diretório ser específico do ambiente de desenvolvimento de cada máquina. Pode ser consertado alterando o diretório nos metadados de cada arquivo.
 
-Main
-As demais pastas contém os módulos principais em Verilog (*.v). O arquivo interfaceGeral.v contém o principal código de integração dos módulos
+### Main  
+As demais pastas contém os módulos principais em Verilog (*.v). O arquivo interfaceGeral.v contém o código principal de integração dos módulos
