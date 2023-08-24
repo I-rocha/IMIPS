@@ -32,6 +32,7 @@ module interfaceGeral(
 	output outawait,
 	output outupdate,
 	output outio_clk,
+	output [20:0]pc_disp,
 	output outclk
 );
 	// Clock da CPU
@@ -175,7 +176,7 @@ module interfaceGeral(
 		.RA1(id[25:21]), 
 		.RA2(id[20:16]), 
 		.EW(regw), 
-		.DF(uf), 	// TODO: DF ESTA COM SINAL SEM SENTIDO. MUDAR AQUI
+		.DF(uf),
 		.DR1(dr1), 
 		.DR2(dr2), 
 		.CFL(cfl), 
@@ -215,6 +216,10 @@ module interfaceGeral(
 	
 	// Mux de escrita nos regs
 	mux2b32 mxdatast(.in0(dm), .in1(r1), .c0(datast), .out(dr1_));
+
+	// PC display
+	bin2display b2dPC(.addr(pc[13:0]), .clk(cpu_clk), .data(pc_disp));
+
 	
 	assign outd1 = dr1[4:0];
 	assign outd2 = dr2[4:0];
