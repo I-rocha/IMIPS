@@ -31,6 +31,10 @@ module UC(
 			5'b00010 : begin out = 17'b11x11000100000000; end // sub
 			5'b00011 : begin out = 17'b11101000010000000; end // addi
 			5'b00100 : begin out = 17'b11101000100000000; end // subi
+			5'b00101 : begin out = 17'b11x11100000000000; end	// mult
+			5'b00110 : begin out = 17'b11x11100010000000; end	// div
+			5'b00111 : begin out = 17'b11101100000000000; end	// multi
+			5'b01000 : begin out = 17'b11101100010000000; end	// divi
 			default : begin out = 17'b00000000000000000; end  // NOP
 			endcase
 		end
