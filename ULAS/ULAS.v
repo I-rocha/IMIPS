@@ -28,6 +28,14 @@ module ULAS(
 				UF = of; 
 			end   // Sub
 			
+			5'b10000 : begin
+				r1 = op1 * op2;
+			end	// Mult
+			
+			5'b10001 : begin
+				r1 = op1 / op2;
+			end	// Div
+			
 			// LOGICO
 			5'b00011 : begin r1 = op1 & op2;    UF = 1'b0; of = 0; end   // AND
 			5'b00100 : begin r1 = op1 | op2;    UF = 1'b0; of = 0; end   // OR
