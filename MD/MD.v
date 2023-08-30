@@ -11,7 +11,7 @@ module MD(
 	input clk         // clock
 );
 	// TODO: Aumentar a memória
-	reg[31:0] mem_d[31:0];  // Memoria de fato
+	reg[31:0] mem_d[300:0];  // Memoria de fato
 	
 	initial begin
 		//mem_d[5] = 32'b00000000000000000000000000001001; // 9
