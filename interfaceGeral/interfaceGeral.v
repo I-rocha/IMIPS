@@ -31,14 +31,14 @@ module interfaceGeral(
 	//output ooutop,
 	output outawait,
 	output outupdate,
-	output outio_clk,
+	//output outio_clk,
 	output [20:0]pc_disp,
 	output outclk
 );
 	// Clock da CPU
 	wire cpu_clk;
 	wire clk_divided;
-	wire io_clk;
+	//wire io_clk;
 
 	// MI - Sign Extend out
 	wire [31:0] id;
@@ -232,7 +232,7 @@ module interfaceGeral(
 	//assign outcfl = cfl;
 	//assign outsleep = sleep;
 	//assign ooutop = outop;
-	assign outio_clk = io_clk;
+	//assign outio_clk = io_clk;
 	assign outclk = cpu_clk;
 	assign outupdate = update;
 	assign outawait = await;
