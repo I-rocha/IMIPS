@@ -13,13 +13,13 @@ always@(posedge CLK_50 or negedge reset_n)
 begin
 	if (~reset_n)
       count = 0;
-	else if (count == 24'b100000000000000000000001)
+	else if (count == 24'b001000000000000000000001)
 		count = 0;
 	else
 		count = count + 1;
   end
   
-  assign divided = count[23];
+  assign divided = count[21];
 
 endmodule
   
