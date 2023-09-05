@@ -30,10 +30,14 @@ module ULAS(
 			
 			5'b10000 : begin
 				r1 = op1 * op2;
+				UF = 0;
+				of = 0;
 			end	// Mult
 			
 			5'b10001 : begin
 				r1 = op1 / op2;
+				UF = 0;
+				of = 0;
 			end	// Div
 			
 			// LOGICO
