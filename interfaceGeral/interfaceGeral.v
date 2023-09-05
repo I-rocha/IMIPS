@@ -7,6 +7,7 @@ module interfaceGeral(
 	input bt_reset,
 	input bt,
 	input [13:0] in,
+	input HardReset,
 	output[27:0] display,
 	
 	//input[31:0] instr_addr, // Instrução
@@ -114,7 +115,7 @@ module interfaceGeral(
 	
 	// IO
 	IO io(.inop(inop), .outop(outop), .bt(~bt), .in(in), .dm(dm), .du(du), .display(display), .await(await), .clk(clk_divided), .clk_state(cpu_clk));
-	assign update = ~(sleep | await);
+	assign update = ((~(sleep | await)) | HardReset);
 	
 	mux2b32 mxinop(.in0(dr2), .in1(du), .c0(inop), .out(dm_));
 	
@@ -163,10 +164,10 @@ module interfaceGeral(
 	mux2b1 mxcon(.in0(1'b1), .in1(cfl), .c0(cond), .out(detour));
 	
 	// AND Condicional - JUPM
-	assign jturn = detour & jump;
+	assign jturn = ((detour & jump) | HardReset);
 	
 	// AND Condicional - BRANCH
-	assign bturn = detour & branch;
+	assign bturn = ((detour & branch) | HardReset);
 	
 	
 	// Banco de Registradores
