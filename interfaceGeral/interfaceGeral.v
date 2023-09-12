@@ -2,7 +2,7 @@ module interfaceGeral(
 	
 	//input start,   // Controle de inicio de variavel
 	//input io_clk,              // TIMER
-	input clk_50,			// TODO: Remove this fake initial clock
+	input clk_50,			
 	//input bt_clk,			// TODO: Remove this fake button clock
 	input bt_reset,
 	input bt,
@@ -19,14 +19,12 @@ module interfaceGeral(
 	//input cdatast,	         // Controle mux DataStore
 	
 	//output[31:0] id,        // Instrução de fato
-	output[4:0] outd1,     // Dado em reg1
-	output[4:0] outd2,	   		 // Dado em reg2
+	output[13:0] outsw,				// Valores dos switchs
 	//output[31:0] outr1,    		 // Resultado ULA
 	//output[31:0] outimm, 			 // Imediato da instrução
 	//output[31:0] pcout,
 	//output[1:0] outregw,
 	output[4:0] outdm,      		// Memoria de dados out
-	//output[31:0] outterbuffer,		// TODO: Removeeee
 	//output outsleep,
 	//output outcfl,
 	//output ooutop,
@@ -222,8 +220,6 @@ module interfaceGeral(
 	bin2display b2dPC(.addr(pc[13:0]), .clk(cpu_clk), .data(pc_disp));
 
 	
-	assign outd1 = dr1[4:0];
-	assign outd2 = dr2[4:0];
 	//assign outr1 = r1;
 	//assign outimm = imm32;
 	assign outdm = dm[4:0];
@@ -237,4 +233,5 @@ module interfaceGeral(
 	assign outclk = cpu_clk;
 	assign outupdate = update;
 	assign outawait = await;
+	assign outsw = in;
 endmodule
