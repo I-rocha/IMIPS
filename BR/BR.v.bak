@@ -22,7 +22,7 @@ module BR(
 	
 	// ONLY FOR TEST           0    1    1    2    2    3
 	initial begin      //      5    0    5    0    5    0
-		//$readmemb("init.txt", register);
+		$readmemb("init.txt", register);
 	end
 	
 	
@@ -30,7 +30,7 @@ module BR(
 	
 		case(EW)
 		// 2'b00 : Nao escrever nada
-			2'b01 : register[AF] <= {31'd0, DF};             // Escrever em Reg RF[0]
+			2'b01 : register[AF][0] <= DF;             // Escrever em Reg RF[0]
 			2'b10 : register[AJ] <= DJ;      // Escrever em Reg RJ
 			2'b11 : register[RA1] <= DR1_;   // Escrever em reg RA1
 			default: ;

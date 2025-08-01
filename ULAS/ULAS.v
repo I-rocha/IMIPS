@@ -54,13 +54,26 @@ module ULAS(
 			5'b01011 : begin UF = (op1 == op2); r1 = 32'b0; of = 0; end  // Equal
 			5'b01100 : begin UF = (op1 != op2); r1 = 32'b0; of = 0; end  // Not Equal
 			5'b01101 : begin UF = (op1 <= op2); r1 = 32'b0; of = 0; end  // Less Equal
-			5'b01110 : begin UF = (op1 >= op2); r1 = 32'b0; of = 0; end  // Grand Equal			
+			5'b01110 : begin UF = (op1 >= op2); r1 = 32'b0; of = 0; end  // Grand Equal
 			
 			// LoadUp
 			5'b01111 : begin
 				UF = 0; 
 				of = 0;
 				r1 = op2 << 16;
+			end
+			
+			// ldown
+			5'b10010 : begin 
+				UF = 0;
+				of = 0;
+				r1 = {op1[31:16], op2[15:0]};
+			end
+			
+			5'b10011 : begin
+				UF = 0;
+				of = 0;
+				r1 = op1;
 			end
 			
 			default  : begin

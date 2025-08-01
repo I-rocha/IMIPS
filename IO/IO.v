@@ -21,15 +21,19 @@ module IO(
 
 	// Button
 	wire bt_high;
+	wire bt_pressed;
+	reg allow_state;
 	reg[31:0] inbuff;
 	reg[31:0] outbuff;
 	
 	// Button pressed
-	debounce db(.bt(bt), .out(bt_high), .clk(clk));
+	debounce db(.bt(bt), .out(bt_pressed), .clk(clk));
+	propagate ppg(.bt_pressed(bt_pressed), .bt_high(bt_high));
 	
 	initial begin
 		inbuff = 32'b00000000000000000000000000000000;
 		outbuff = 32'b00000000000000000000000000000000;
+		allow_state = 1'b1;
 	end
 	
 	always @(negedge clk) begin
@@ -38,10 +42,11 @@ module IO(
 		if (inop) begin
 			
 			// Button pressed
-			if (bt_high) begin
+			if (bt_high == allow_state) begin
 				inbuff = in[13:0];
 				outbuff = outbuff;
-				await = 1'b0; 
+				await = 1'b0;
+				allow_state <= ~allow_state;
 			end
 			
 			// Button not pressed

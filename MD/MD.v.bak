@@ -13,10 +13,10 @@ module MD(
 	
 	// Final Work with 10 process
 	// reg[31:0] mem_d[2000:0];  // Memoria de fato
-	reg[31:0] mem_d[299:0]; 
+	reg[31:0] mem_d[100:0]; 
 	
 	initial begin
-		//$readmemb("single_port_rom.txt", mem_d);
+		$readmemb("single_port_rom.txt", mem_d);
 	end
 	always @(negedge clk) begin
 	

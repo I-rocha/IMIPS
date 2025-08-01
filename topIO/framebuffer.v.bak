@@ -1,0 +1,35 @@
+module framebuffer(
+	input clk50,
+	input [8:0]dt,
+	input [9:0]Ax,		// endereco X
+	input [9:0]Ay,		// endereço Y
+	input [9:0]WAx,		// endereco de escrita X
+	input [9:0]WAy,		// endereço de escrita Y
+	input SW,			// Sinal de escrita
+	
+	output reg [8:0] pixelRGB
+);
+
+//reg [8:0] fb [159:0][119:0];	// 9 bits color for pixel. Resolution of (640/4)*(480/4)
+(* ram_init_file = "framebuffer.mif" *)  // Força uso de blocos de memória dedicados
+reg [8:0] fb [0:19199];
+
+wire [7:0] x_index = Ax[9:2]; // Ax / 4 (0 a 159)
+wire [7:0] y_index = Ay[9:2]; // Ay / 4 (0 a 119)
+
+wire [7:0] Wx_index = WAx[9:2]; // Ax / 4 (0 a 159)
+wire [7:0] Wy_index = WAy[9:2]; // Ay / 4 (0 a 119)
+
+wire [14:0] addr = (y_index << 7) + (y_index << 5) + x_index; // equivale a y*160 + x
+
+wire [14:0] Waddr = (Wy_index << 7) + (Wy_index << 5) + Wx_index; // equivale a y*160 + x
+
+always @(negedge clk50) begin
+	pixelRGB <= fb[addr];	// fb[Ax/4][Ay/4]
+	
+	if(SW) begin
+		fb[Waddr] <= dt;
+	end
+end
+
+endmodule

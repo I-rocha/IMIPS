@@ -150,19 +150,12 @@ module interfaceGeral(
 	// Comunicação Digital TOP IO
 	wire [9:0]mouseX;
 	wire [9:0]mouseY;
-	wire RJoyZ;
-	wire zBt;
-	wire Mc;
-	wire [31:0] joyStickOut;
-	
-	mux2b32 mxReadJoyStick(.in0({12'd0, mouseX, mouseY}), .in1({31'd0, zBt}), .c0(RJoyZ), .out(joyStickOut));
 	topIO(
 		.clk50(clk_50),
 		.Rx(Rx),
 		.nreset(nresetTopIO),
 		.resetPos(resetMouse),
 		.outAlt(IODebugIn),
-		.Mc(Mc),
 		.EWfb(EWfb),
 		.dt(dr2[9:0]),
 		.frameX(dr1[19:10]),
@@ -170,7 +163,6 @@ module interfaceGeral(
 		
 		.mX(mouseX),
 		.mY(mouseY),
-		.zBt(zBt),
 		.hSync(hSync),
 		.vSync(vSync),
 		.clk25(clk25),
@@ -227,8 +219,7 @@ module interfaceGeral(
 	UC uc0(
 		.opcode(instr[31:26]),	
 		.funct(instr[4:0]),
-		.Mc(Mc),
-		.RJoyZ(RJoyZ),
+		
 		.EWfb(EWfb),
 		.haltOp(haltOp),
 		.lmop(lmop),
@@ -280,7 +271,7 @@ module interfaceGeral(
 		.clk(cpu_clk)
 	);
 	
-	mux2b32 mxcflw(.in0(dr1), .in1({31'd0, cfl}), .c0(cflw),.out(op1_aux));
+	mux2b32 mxcflw(.in0(dr1), .in1(cfl), .c0(cflw),.out(op1_aux));
 	
 	// Mux escolha do imediato dado o formato de instrução
 	mux2b16 mximmop(.in0(instr[15:0]), .in1(instr[20:5]), .c(immop), .out(imm16));
@@ -342,7 +333,7 @@ module interfaceGeral(
 	
 	// Mux de escrita nos regs
 //	mux2b32 mxdatast(.in0(dm), .in1(r1), .c0(datast), .out(dr1_));
-	mux4b32 mxhddatast(.in0(dm), .in1(r1), .in2(joyStickOut), .in3(pcone), .c0(datast), .c1(hdst), .out(dr1_));
+	mux4b32 mxhddatast(.in0(dm), .in1(r1), .in2({12'd0, mouseX, mouseY}), .in3(pcone), .c0(datast), .c1(hdst), .out(dr1_));
 
 	// PC display
 	bin2display b2dPC(.addr(pc[13:0]), .clk(cpu_clk), .data(pc_disp));
@@ -404,9 +395,7 @@ module interfaceGeral(
 	
 	assign outLGREEN[7:0] = dm[7:0];
 	//assign outLRED = dm[25:8];
-	//assign outLRED = dr1[17:0];
-	// assign outLRed = dr1[4:0];
-	assign outLRED[4:0] = dr1[4:0];
+	assign outLRED = dr1[17:0];
 
 	// assign auxout[1:0] = md_am[15:14];
 	// assign outsw[13:0] = md_am[13:0];

@@ -15,8 +15,7 @@ begin
 	if (~reset_n)
       count = 0;
 	// else if (count == 25'b0001000000000000000000001)
-	//else if(count == 25'b0000000001000000000000000)
-	else if(count == 25'b0000000000000000000000010)
+	else if(count == 25'b0000000001000000000000000)
 	// else if(count == 25'b0100000000000000000000000)
 		count = 0;
 	else
@@ -24,8 +23,7 @@ begin
   end
   
   // assign divided = count[21];
-  // assign divided = count[15];
-  assign divided = count[1];
+  assign divided = count[15];
   // assign divided = count[23];
 
 endmodule

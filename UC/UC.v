@@ -5,10 +5,21 @@ module UC(
 	input[4:0] funct,
 	
 	// OUT
+	output haltOp,
+	output lmop,
+	output cflw,
+	output basew,
+	output ctime,
+	output stime,
+	output jumpR,
+	output insW,
+	output lcdOp,
 	output[1:0] regw,
 	output immop,
+	output dataopp,
 	output dataop,
 	output datast,
+	output hdst,
 	output[4:0] aluop,
 	output memw,
 	output cond,
@@ -16,10 +27,13 @@ module UC(
 	output branch,
 	output sleep,
 	output inop,
-	output outop
+	output outop,
+	output EWfb,
+	output RJoyZ,
+	output Mc		// Mouse Color
 );
 	
-	reg[16:0] out;
+	reg[30:0] out;
 
 	always @* begin
 		case (opcode)
@@ -27,81 +41,114 @@ module UC(
 		6'b000001 : 
 		begin 
 			case (funct)
-			5'b00001 : begin out = 17'b11x11000010000000; end // add
-			5'b00010 : begin out = 17'b11x11000100000000; end // sub
-			5'b00011 : begin out = 17'b11101000010000000; end // addi
-			5'b00100 : begin out = 17'b11101000100000000; end // subi
-			5'b00101 : begin out = 17'b11x11100000000000; end	// mult
-			5'b00110 : begin out = 17'b11x11100010000000; end	// div
-			5'b00111 : begin out = 17'b11101100000000000; end	// multi
-			5'b01000 : begin out = 17'b11101100010000000; end	// divi
-			default : begin out = 17'b00000000000000000; end  // NOP
+			5'b00001 : begin out = 31'b000000010000011x110000010000000; end // add
+			5'b00010 : begin out = 31'b000000010000011x110000100000000; end // sub
+			5'b00011 : begin out = 31'b0000000100000111010000010000000; end // addi
+			5'b00100 : begin out = 31'b0000000100000111010000100000000; end // subi
+			5'b00101 : begin out = 31'b000000010000011x110100000000000; end	// mult
+			5'b00110 : begin out = 31'b000000010000011x110100010000000; end	// div
+			5'b00111 : begin out = 31'b0000000100000111010100000000000; end	// multi
+			5'b01000 : begin out = 31'b0000000100000111010100010000000; end	// divi
+			default : begin out = 31'b0000000100000000000000000000000; end  // NOP
 			endcase
 		end
 		// Bitwise
 		6'b000010 : begin 
 			case (funct)
-			5'b00001 : begin out = 17'b11x11000110000000; end // AND
-			5'b00010 : begin out = 17'b11x11001000000000; end // OR
-			5'b00011 : begin out = 17'b11xx1001010000000; end // NOT
-			5'b00100 : begin out = 17'b11x11001100000000; end // XOR
-			5'b00101 : begin out = 17'b11101000110000000; end // ANDi
-			5'b00110 : begin out = 17'b11101001000000000; end // ORi
-			5'b00111 : begin out = 17'b11101001010000000; end // NOTi
-			5'b01000 : begin out = 17'b11101001100000000; end // XORi
-			5'b01001 : begin out = 17'b11xx1001110000000; end // shiftl
-			5'b01010 : begin out = 17'b11xx1010000000000; end // shiftr
-			default : begin out = 17'b00000000000000000; end	// NOP
+			5'b00001 : begin out = 31'b000000010000011x110000110000000; end // AND
+			5'b00010 : begin out = 31'b000000010000011x110001000000000; end // OR
+			5'b00011 : begin out = 31'b000000010000011xx10001010000000; end // NOT
+			5'b00100 : begin out = 31'b000000010000011x110001100000000; end // XOR
+			5'b00101 : begin out = 31'b0000000100000111010000110000000; end // ANDi
+			5'b00110 : begin out = 31'b0000000100000111010001000000000; end // ORi
+			5'b00111 : begin out = 31'b0000000100000111010001010000000; end // NOTi
+			5'b01000 : begin out = 31'b0000000100000111010001100000000; end // XORi
+			5'b01001 : begin out = 31'b000000010000011xx10001110000000; end // shiftl
+			5'b01010 : begin out = 31'b000000010000011xx10010000000000; end // shiftr
+			default : begin out = 31'b0000000100000000000000000000000; end	// NOP
 			endcase
 		end
 		// Comparacao
 		6'b000011 : begin 
 			case (funct)
-			5'b00001 : begin out = 17'b01x1x010010000000; end // less
-			5'b00010 : begin out = 17'b01x1x010100000000; end // grand
-			5'b00011 : begin out = 17'b01x1x010110000000; end // eq
-			5'b00100 : begin out = 17'b01x1x011000000000; end // neq
-			5'b00101 : begin out = 17'b01x1x011010000000; end // leq
-			5'b00110 : begin out = 17'b01x1x011100000000; end // geq
-			5'b00111 : begin out = 17'b0110x010010000000; end // lessi
-			5'b01000 : begin out = 17'b0110x010100000000; end // grandi
-			5'b01001 : begin out = 17'b0110x010110000000; end // eqi
-			5'b01010 : begin out = 17'b0110x011000000000; end // neqi
-			5'b01011 : begin out = 17'b0110x011010000000; end // leqi
-			5'b01100 : begin out = 17'b0110x011100000000; end // geqi
-			default : begin out = 17'b00000000000000000; end   // NOP
+			5'b00001 : begin out = 31'b000000010000001x1x0010010000000; end // less
+			5'b00010 : begin out = 31'b000000010000001x1x0010100000000; end // grand
+			5'b00011 : begin out = 31'b000000010000001x1x0010110000000; end // eq
+			5'b00100 : begin out = 31'b000000010000001x1x0011000000000; end // neq
+			5'b00101 : begin out = 31'b000000010000001x1x0011010000000; end // leq
+			5'b00110 : begin out = 31'b000000010000001x1x0011100000000; end // geq
+			5'b00111 : begin out = 31'b00000001000000110x0010010000000; end // lessi
+			5'b01000 : begin out = 31'b00000001000000110x0010100000000; end // grandi
+			5'b01001 : begin out = 31'b00000001000000110x0010110000000; end // eqi
+			5'b01010 : begin out = 31'b00000001000000110x0011000000000; end // neqi
+			5'b01011 : begin out = 31'b00000001000000110x0011010000000; end // leqi
+			5'b01100 : begin out = 31'b00000001000000110x0011100000000; end // geqi
+			default : begin out = 31'b0000000100000000000000000000000; end   // NOP
 			endcase
 		end
 		// Movimentacao
-		6'b000100 : begin out = 17'b11x11000000000000; end // mv
-		6'b000101 : begin out = 17'b11101000000000000; end	// mvi
-		6'b000110 : begin out = 17'b0000x000011000000; end // sw
-		6'b000111 : begin out = 17'b11000000010000000; end // lw
-		6'b001000 : begin out = 17'b11101011110000000; end // lup
-		6'b001001 : begin out = 17'b11101000000000000; end // ldown
+		6'b000100 : begin out = 31'b000000010000011x110000000000000; end // mv
+		6'b000101 : begin out = 31'b0000000100000111010000000000000; end // mvi
+		6'b000110 : begin out = 31'b00000001000000000x0000011000000; end // sw
+		6'b000111 : begin out = 31'b0000000100000110000000010000000; end // lw
+		6'b001000 : begin out = 31'b0000000100000111010011110000000; end // lup
+		6'b001001 : begin out = 31'b0000000100000111010100100000000; end // ldown
 		
 		// Desvio
-		6'b001010 : begin out = 17'b00xxxxxxxx0010000; end // jump
-		6'b001011 : begin out = 17'b10xxxxxxxx0010000; end // jal
-		6'b001100 : begin out = 17'b00xxxxxxxx0110000; end // jc
-		6'b001101 : begin out = 17'b000xxxxxxx0001000; end // branch
-		6'b001110 : begin out = 17'b100xxxxxxx0001000; end // bal
-		6'b001111 : begin out = 17'b000xxxxxxx0101000; end // bc
-		6'b010000 : begin out = 17'b0000x000011000010; end	// Get/IN
-		6'b010001 : begin out = 17'b0000x000010000001; end	// Print/OUT
-		6'b111111 : begin out = 17'b00000000000000100; end // STOP	
-		default : begin out = 17'b00000000000000000; end   // NOP
+		6'b001010 : begin out = 31'b000000010000000xxx0xxxxx0010000; end // jump
+		6'b001011 : begin out = 31'b000000010000010xxx0xxxxx0010000; end // jal
+		6'b001100 : begin out = 31'b000000010000000xxx0xxxxx0110000; end // jc
+		6'b001101 : begin out = 31'b0000000100000000xx0xxxxx0001000; end // branch
+		6'b001110 : begin out = 31'b0000000100000100xx0xxxxx0001000; end // bal
+		6'b001111 : begin out = 31'b0000000100000000xx0xxxxx0101000; end // bc
+		
+		// Outras
+		6'b010000 : begin out = 31'b00000000000000000x0000011000010; end // Get/IN
+		6'b010001 : begin out = 31'b00000000000000000x0000010000001; end // Print/OUT
+		6'b010010 : begin out = 31'b0000000100010110101000010000000; end // lwHD
+		6'b010011 : begin out = 31'b0000000000001000000xxxxx0000000; end // display
+		6'b010100 : begin out = 31'b0000000100100000000000010000000; end // swMI
+		6'b010101 : begin out = 31'b0000000111000110011000000010000; end // jt
+		6'b010110 : begin out = 31'b0000000101000110011000000010000; end // jal2
+		6'b010111 : begin out = 31'b000001_01000_00000_01010_01100_00000; end // gcfl
+		6'b011000 : begin out = 31'b000000_11000_00000_00010_01100_00000; end // sb
+		6'b011001 : begin out = 31'b000010_00000_01000_000xx_xxx00_00000; end // displayModifier
+		6'b011010 : begin out = 31'b0001000100000000000000000000000; end		 // HALT
+		
+		// Comunicação digital
+		6'b011011 : begin out = 31'b0010x001000x0000xxxxxxxx0000000; end		 // vgaW
+		6'b011100 : begin out = 31'b0000x00100000110001000010000000; end		 // vgaR
+		6'b011101 : begin out = 31'b0100x00100000110001000010000000; end		 // joyClick // joystickRead
+		6'b011110 : begin out = 31'b1000x001000x0000xxxxxxxx0000000; end		 // Mouse Color
+		
+		// Ultimas
+		6'b111111 : begin out = 31'b0000000000000000000000000000100; end // STOP	
+		default : begin out = 31'b0000000100000000000000000000000; end   // NOP
 		
 		
 		endcase
 	end
 	
-	assign regw[1] = out[16];
-	assign regw[0] = out[15];
-	assign immop = out[14];
-	assign dataop = out[13];
-	assign datast = out[12];
-	assign aluop[4] = out[11];
+	assign Mc = out[30];
+	assign RJoyZ = out[29];
+	assign EWfb = out[28];			// Activate writing mode on framebuffer
+	assign haltOp = out[27];		// Activate interruption module
+	assign lmop = out[26];		// choose between (1)display function or (0)display char
+	assign cflw = out[25];		// get flag cfl
+	assign basew = out[24];		// set basis
+	assign ctime = out[23];		// count time
+	assign stime = out[22];		// start time
+	assign jumpR = out[21];		// deviation jump
+	assign insW = out[20];		// write to MI
+	assign dataopp = out[19];	// op1 of ULA = imm32 (if 1) or dr1_aux (if 0)
+	assign lcdOp = out[18];		// write to LCD
+	assign regw[1] = out[17];
+	assign regw[0] = out[16];
+	assign immop = out[15];		// Immediate from (instr[15:0] if immop = 0) or (instr[20:5] if immop = 1)
+	assign dataop = out[14];	// op2 of ULA = imm(if 0) or dr2(if 1)
+	assign datast = out[13];	// choose who write to dr1'
+	assign hdst = out[12];		// choose who write to dr1'
+	assign aluop[4] = out[11];	
 	assign aluop[3] = out[10];
 	assign aluop[2] = out[9];
 	assign aluop[1] = out[8];

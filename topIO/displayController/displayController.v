@@ -1,0 +1,89 @@
+module displayController(
+	input clk50,
+	input [9:0] mouseX,
+	input [9:0] mouseY,
+	input [8:0] pixelRGB,
+	input [8:0] mouseColor,
+	output reg [9:0] hPos,
+	output reg [9:0] vPos,
+	output hSync,           
+	output vSync,
+	output clk25,
+	output reg [7:0] red,         // canal vermelho (4 bits)
+	output reg [7:0] green,       // canal verde (4 bits)
+	output reg [7:0] blue,        // canal azul (4 bits)
+	output video_on          // sinal ativo durante região visível
+);
+
+divisor25 dv(
+	clk50,
+	clk25
+);
+
+
+parameter H_VISIBLE_AREA = 640;
+parameter H_FRONT_PORCH  = 16;
+parameter H_SYNC_PULSE   = 96;
+parameter H_BACK_PORCH   = 48;
+parameter H_TOTAL        = H_VISIBLE_AREA + H_FRONT_PORCH + H_SYNC_PULSE + H_BACK_PORCH;
+
+parameter V_VISIBLE_AREA = 480;
+parameter V_FRONT_PORCH  = 10;
+parameter V_SYNC_PULSE   = 2;
+parameter V_BACK_PORCH   = 33;
+parameter V_TOTAL        = V_VISIBLE_AREA + V_FRONT_PORCH + V_SYNC_PULSE + V_BACK_PORCH;
+
+
+reg [9:0] hCount= 0;  // contador horizontal
+reg [9:0] vCount = 0;  // contador vertical
+
+// Contadores horizontais e verticais
+always @(posedge clk25) begin
+  if (hCount == H_TOTAL - 1) begin
+		hCount <= 0;
+		if (vCount == V_TOTAL - 1)
+			 vCount <= 0;
+		else
+			 vCount <= vCount + 10'd1;
+  end else begin
+		hCount <= hCount + 10'd1;
+  end
+  if(hCount < 640 && vCount < 480) begin
+	hPos <= hCount;
+	vPos <= vCount;
+  end
+end
+
+// Sinais de sincronismo
+assign hSync = ~(hCount >= (H_VISIBLE_AREA + H_FRONT_PORCH) && hCount <  (H_VISIBLE_AREA + H_FRONT_PORCH + H_SYNC_PULSE));
+
+assign vSync = ~(vCount >= (V_VISIBLE_AREA + V_FRONT_PORCH) && vCount <  (V_VISIBLE_AREA + V_FRONT_PORCH + V_SYNC_PULSE));
+
+// Região visível
+assign video_on = (hCount < H_VISIBLE_AREA) && (vCount < V_VISIBLE_AREA);
+
+
+// Geração de cor básica (exemplo: quadrado vermelho no canto)
+always @(negedge clk25) begin
+	if(video_on) begin
+		if(hCount >= (mouseX << 2) && hCount < (mouseX << 2) + 4
+		&& vCount >= (mouseY << 2) && vCount < (mouseY << 2) + 4) begin
+			red   = mouseColor[8:6] << 5;
+			green = mouseColor[5:3] << 5;
+			blue  = mouseColor[2:0] << 5;
+		end
+		else begin
+			red = pixelRGB[8:6] << 5;
+			green = pixelRGB[5:3] << 5;
+			blue = pixelRGB[2:0] << 5;
+		end
+	end 
+	else begin
+		red   = 0;
+		green = 0;
+		blue  = 0;
+	end
+end
+
+
+endmodule

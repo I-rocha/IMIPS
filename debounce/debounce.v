@@ -3,18 +3,37 @@ module debounce(
 	input clk,
 	output out
 );
-	wire digit0, digit1, digit2;
-	wire t0, t1, t2;
-	
-	//assign t0 = bt;
-	assign t1 = digit0;
-	assign t2 = digit0 & digit1;
 
-	flipflopT f0(.T(bt), .nclear(bt), .clk(clk), .out(digit0));
-	flipflopT f1(.T(t1), .nclear(bt), .clk(clk), .out(digit1));
-	flipflopT f2(.T(t2), .nclear(bt), .clk(clk), .out(digit2));
+	parameter[7:0] threshold = 8'b11111111;	// for fast clock
+	// parameter[7:0] threshold = 8'b00000111; // for slow clock
+	reg [7:0]count;
+	reg high;
 	
-	assign out = digit0 & digit1 & digit2;
+	initial begin
+		high = 1'b0;
+	end
 
+	always @(posedge clk) begin
+		if(bt == 1) begin
+			if(count == threshold) begin
+				count <= count;
+				high <= 1'b1;
+			end
+			else begin
+				count <= count + 1;	
+				high <= 1'b0;
+			end
+		end
+		
+		
+		
+		else begin
+			count <= 8'b00000000;
+			high <= 1'b0;
+		end
+
+	end
+	
+	assign out = high;
 
 endmodule
