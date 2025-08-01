@@ -27,3 +27,5 @@ Esse projeto foi atualizado com o laboratório Sistema operacionais e de comunic
 - Controlador de VGA
 - Leitor de joystick
 - Gerenciamento de framebuffer
+
+A pasta `complementar` contém o código do `arduino` para controle do joystick e o código para conversão de um plano de fundo para o `framebuffer`
