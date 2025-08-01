@@ -17,3 +17,13 @@ As demais pastas contém os módulos principais em Verilog (*.v). O arquivo inte
 `/doc/IMIPS.pdf` - é o documento principal descrevendo todo projeto.  
 `/doc/sysml/Processor.vpp` - é um arquivo contendo uma modelagem superficial do sistema em sysml. Foi desenvolvido 1 diagrama de requisitos, 4 diagramas de casos de uso, 3 diagramas de atividades  
 `/doc/sysml/Processor.pdf` - pequena descrição sobre a modelagem em sysml
+
+
+### Atualização 05/25
+Esse projeto foi atualizado com o laboratório Sistema operacionais e de comunicação digital, então as funcionalidades do processador foram expandidas e o diagrama inicial já está ultrapassado. Foram adicionadas operações para lidar com:
+- Troca de contexto
+- Gerenciamento de memória simulada de HD (Desabilitada)
+- Uso do LCD
+- Controlador de VGA
+- Leitor de joystick
+- Gerenciamento de framebuffer
